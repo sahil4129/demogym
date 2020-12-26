@@ -1,9 +1,18 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
-
+const router = express.Router();
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true })); 
+
+// app.get('/',(req,res)=>{
+//   console.log("redirect");
+//   res.sendFile(__dirname + '/index.html');
+// });
+
+app.use(express.static(path.join(__dirname, '/')));
+
 
 app.post('/example', (req, res) => {
     //console.log(req.body);
@@ -14,6 +23,7 @@ app.post('/example', (req, res) => {
       res.send("login Failed");
     }
 });
+
 
 const port = 3000;
 
