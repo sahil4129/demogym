@@ -25,7 +25,7 @@ exports.loginAdminfun = catchAsync (async (req, res) => {
     }
 });
 
-cron.schedule('0 0 */23 * * *'', () => {
+cron.schedule('0 0 */23 * * *', () => {
 
     console.log("Cron Job Running Starting");
     try {
