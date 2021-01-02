@@ -10,6 +10,7 @@ const registerRouter = require('./node_files/routes/registerRouter');
 const adminDetails = require('./node_files/routes/adminDetailsrouter');
 
 //routes
+app.engine('pug', require('pug').__express)
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'protected'));
 
