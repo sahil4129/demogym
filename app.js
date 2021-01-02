@@ -3,30 +3,28 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const router = express.Router();
 const app = express();
+const Mysql = require('sync-mysql');
+
+const adminRouter = require('./node_files/routes/adminLoginrouter');
+const registerRouter = require('./node_files/routes/registerRouter');
+const adminDetails = require('./node_files/routes/adminDetailsrouter');
+
+//routes
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'protected'));
+
 
 app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/',(req,res)=>{
-//   console.log("redirect");
-//   res.sendFile(__dirname + '/index.html');
-// });
-
-app.use(express.static(path.join(__dirname, '/')));
+app.use('/register',registerRouter);
+app.use('/loginAdmin', adminRouter);
 
 
-app.post('/example', (req, res) => {
-    //console.log(req.body);
-    if(req.body.username=="admin" && req.body.password=="fxadmin" && req.body.phone=="123321" && req.body.token=="admin"){
-      res.send("login Sucess !!");
-    }
-    else{
-      res.send("login Failed");
-    }
-});
 
+//server
 
 const port = 3000;
-
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
